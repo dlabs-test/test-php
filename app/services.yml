@@ -1,0 +1,10 @@
+services:
+    app.command.test_reset_data:
+        class: BOF\Command\TestDataResetCommand
+        tags:
+            - { name: console.command }
+
+    app.command.report_yearly:
+        class: BOF\Command\ReportYearlyCommand
+        tags:
+            - { name: console.command }

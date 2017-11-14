@@ -1,0 +1,28 @@
+{
+    "name": "bof/candidate-test-php",
+    "description": "Simple test",
+    "type": "project",
+    "require": {
+        "symfony/console": "^3.2",
+        "symfony/finder": "^3.2",
+        "symfony/dependency-injection": "^3.2",
+        "symfony/config": "^3.2",
+        "symfony/yaml": "^3.2",
+        "doctrine/dbal": "^2.5"
+    },
+    "license": "proprietary",
+    "authors": [
+        {
+            "name": "Damjan Znidarsic",
+            "email": "damjan.znidarsic@dlabs.si"
+        }
+    ],
+    "require-dev": {
+        "symfony/var-dumper": "^3.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "BOF\\": "src/"
+        }
+    }
+}

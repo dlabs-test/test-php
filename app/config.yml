@@ -1,0 +1,8 @@
+services:
+    database_configuration:
+        class: \Doctrine\DBAL\Configuration
+
+    database_connection:
+        class: \Doctrine\DBAL\Driver\Connection
+        factory: [\Doctrine\DBAL\DriverManager, getConnection]
+        arguments: [{url: 'mysql://bof-test:bof-test@127.0.0.1/bof_test'}, '@database_configuration']

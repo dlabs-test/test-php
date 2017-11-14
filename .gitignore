@@ -1,0 +1,9 @@
+vendor
+._*
+*___jb_bak___
+.DS_Store
+._.DS_Store
+*.rdb
+.idea
+.localized
+.vscode
