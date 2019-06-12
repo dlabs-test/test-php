@@ -35,8 +35,14 @@ class ReportYearlyCommand extends ContainerAwareCommand
         $statistics = new Statistic($connection);
         $views = $statistics->yearlyViews($year);
 
+        // If no data is available
+        if (empty($views)) {
+            $io->caution('There is no data available.');
+            return false;
+        }
+
         // Show data in a table - headers, data
-        $headers = ['Profile ' . $year,];
+        $headers = ['Profile           ' . $year,];
 
         for ($i = 1; $i <= 12; $i++) {
             array_push($headers, date('M', mktime(0, 0, 0, $i, 10)));
