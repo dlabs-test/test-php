@@ -123,7 +123,6 @@ class ReportYearlyCommand extends ContainerAwareCommand
             $unixTime = strtotime($report['date']);
             $year = date('Y', $unixTime);
             $month = date('M', $unixTime);
-            echo $month . ' ' . $year . ' ' . $userId;
 
             // check if year exists, otherwise set year array
             if (!in_array($year, $this->_yearsScope, false)) {
