@@ -18,14 +18,14 @@ class ReportRepository implements ReportRepositoryInterface
         $sql = '
             SELECT
                 p.profile_id,
-                p.profile_name,
+                ANY_VALUE(p.profile_name) as profile_name,
                 MONTH(v.date) AS month,
                 SUM(v.views) AS views
             FROM profiles p
                 LEFT JOIN views v ON v.profile_id = p.profile_id
             WHERE YEAR(v.date) = :year OR v.date IS NULL
             GROUP BY p.profile_id, MONTH(v.date)
-            ORDER BY p.profile_name, month DESC
+            ORDER BY profile_name ASC
         ';
 
         $statement = $this->db->prepare($sql);
