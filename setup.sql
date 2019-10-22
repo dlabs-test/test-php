@@ -1,12 +1,12 @@
 DROP DATABASE IF EXISTS `bof_test`;
 CREATE DATABASE IF NOT EXISTS `bof_test` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
 
-DROP USER IF EXISTS 'bof-test'@'localhost';
-CREATE USER 'bof-test'@'localhost' IDENTIFIED BY 'bof-test';
+DROP USER IF EXISTS 'bof-test'@'%';
+CREATE USER 'bof-test'@'%' IDENTIFIED BY 'bof-test';
 
-GRANT USAGE ON * . * TO 'bof-test'@'localhost' IDENTIFIED BY 'bof-test' WITH MAX_QUERIES_PER_HOUR 0 MAX_CONNECTIONS_PER_HOUR 0 MAX_UPDATES_PER_HOUR 0 MAX_USER_CONNECTIONS 0 ;
+GRANT USAGE ON * . * TO 'bof-test'@'%' IDENTIFIED BY 'bof-test' WITH MAX_QUERIES_PER_HOUR 0 MAX_CONNECTIONS_PER_HOUR 0 MAX_UPDATES_PER_HOUR 0 MAX_USER_CONNECTIONS 0;
 
-GRANT ALL PRIVILEGES ON `bof\_test` . * TO 'bof-test'@'localhost' WITH GRANT OPTION ;
+GRANT ALL PRIVILEGES ON `bof\_test` . * TO 'bof-test'@'%' WITH GRANT OPTION;
 
 DROP TABLE IF EXISTS `bof_test`.`profiles`;
 CREATE TABLE `bof_test`.`profiles` (

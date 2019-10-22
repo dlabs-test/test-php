@@ -1,4 +1,5 @@
-<?php
+<?php declare(strict_types=1);
+
 namespace BOF\Command;
 
 use Doctrine\DBAL\Driver\Connection;
@@ -6,6 +7,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
+use Symfony\Component\Console\Input\InputArgument;
 
 class ReportYearlyCommand extends ContainerAwareCommand
 {
@@ -14,19 +16,21 @@ class ReportYearlyCommand extends ContainerAwareCommand
         $this
             ->setName('report:profiles:yearly')
             ->setDescription('Page views report')
+            ->addArgument('year', InputArgument::REQUIRED, 'For which year do you want a report?')
         ;
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        /** @var $db Connection */
         $io = new SymfonyStyle($input,$output);
-        $db = $this->getContainer()->get('database_connection');
+        $reportService = $this->getContainer()->get('app.services.report_service');
 
-        $profiles = $db->query('SELECT profile_name FROM profiles')->fetchAll();
+        $selectedYear = (int) $input->getArgument('year');
 
-        // Show data in a table - headers, data
-        $io->table(['Profile'], $profiles);
+        $headers = $reportService->getReportHeaders($selectedYear);
+        $report = $reportService->generateYearlyReportData($selectedYear);
 
+        $content = count($report) > 0 ? $report : [['No views for requested year!']];
+        $io->table($headers, $content);
     }
 }

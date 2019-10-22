@@ -8,3 +8,13 @@ services:
         class: BOF\Command\ReportYearlyCommand
         tags:
             - { name: console.command }
+
+    app.repositories.report_repository:
+        class: BOF\Repositories\Report\ReportRepository
+        arguments:
+            - '@database_connection'
+
+    app.services.report_service:
+        class: BOF\Services\Report\ReportService
+        arguments:
+            - '@app.repositories.report_repository'
